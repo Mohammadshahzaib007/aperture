@@ -11,6 +11,7 @@
 - **Hide Recommendations**: Block recommended videos on the sidebar and homepage.
 - **Hide Homepage**: Replace the YouTube homepage with a clean, distraction-free interface.
 - **Customizable**: Toggle each feature individually or use the "Select All" option.
+- **Hide Shorts Menu**: Remove the Shorts menu from YouTube menu.
 - **Sync Across Devices**: Your preferences are saved and synced across all your devices (if logged into Chrome).
 
 ---
@@ -54,6 +55,7 @@ _YouTube with distractions removed for a focused experience._
    - **Comments**
    - **Recommendations**
    - **Homepage**
+   - **Shorts Menu**
 3. Use the **Select All** option to enable/disable all features at once.
 4. Refresh the YouTube page to see the changes.
 
