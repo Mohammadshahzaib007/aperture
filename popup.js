@@ -4,15 +4,17 @@ document.addEventListener("DOMContentLoaded", () => {
     "toggleRecommendations"
   );
   const toggleHomepage = document.getElementById("toggleHomepage");
+  const toggleShortsMenu = document.getElementById("toggleShortsMenu");
   const selectAll = document.getElementById("selectAll");
 
   // Load saved states
   chrome.storage.sync.get(
-    ["hideComments", "hideRecommendations", "hideHomepage"],
+    ["hideComments", "hideRecommendations", "hideHomepage", "hideShortsMenu"],
     (data) => {
       toggleComments.checked = data.hideComments || false;
       toggleRecommendations.checked = data.hideRecommendations || false;
       toggleHomepage.checked = data.hideHomepage || false;
+      toggleShortsMenu.checked = data.hideShortsMenu || false;
       updateSelectAll();
     }
   );
@@ -24,6 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
         hideComments: toggleComments.checked,
         hideRecommendations: toggleRecommendations.checked,
         hideHomepage: toggleHomepage.checked,
+        hideShortsMenu: toggleShortsMenu.checked,
       },
       () => {
         // Send a message to the content script to update the page
@@ -33,6 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
             hideComments: toggleComments.checked,
             hideRecommendations: toggleRecommendations.checked,
             hideHomepage: toggleHomepage.checked,
+            hideShortsMenu: toggleShortsMenu.checked,
           });
         });
       }
@@ -44,7 +48,8 @@ document.addEventListener("DOMContentLoaded", () => {
     selectAll.checked =
       toggleComments.checked &&
       toggleRecommendations.checked &&
-      toggleHomepage.checked;
+      toggleHomepage.checked &&
+      toggleShortsMenu.checked;
   }
 
   // Add event listeners for individual toggles
@@ -60,12 +65,17 @@ document.addEventListener("DOMContentLoaded", () => {
     saveState();
     updateSelectAll();
   });
+  toggleShortsMenu.addEventListener("change", () => {
+    saveState();
+    updateSelectAll();
+  });
 
   // Add event listener for "Select All"
   selectAll.addEventListener("change", () => {
     toggleComments.checked = selectAll.checked;
     toggleRecommendations.checked = selectAll.checked;
     toggleHomepage.checked = selectAll.checked;
+    toggleShortsMenu.checked = selectAll.checked;
     saveState();
   });
 });
