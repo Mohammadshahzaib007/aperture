@@ -1,0 +1,15 @@
+body {
+  font-family: Arial, sans-serif;
+  padding: 10px;
+  width: 200px;
+}
+
+label {
+  display: block;
+  margin: 8px 0;
+}
+
+#selectAll {
+  margin-top: 16px;
+  font-weight: bold;
+}
