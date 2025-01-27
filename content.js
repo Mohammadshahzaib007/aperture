@@ -1,10 +1,16 @@
 // Function to hide/show elements based on selectors
 function toggleElements(selectors, shouldHide) {
   selectors.forEach((selector) => {
-    const element = document.querySelector(selector);
-    if (element) {
-      element.style.display = shouldHide ? "none" : "";
-    }
+    const elements = document.querySelectorAll(selector);
+    elements.forEach((element) => {
+      if (element) {
+        const currentDisplay = window.getComputedStyle(element).display;
+        const targetDisplay = shouldHide ? "none" : "";
+        if (currentDisplay !== targetDisplay) {
+          element.style.display = targetDisplay;
+        }
+      }
+    });
   });
 }
 
@@ -28,16 +34,66 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   }
 });
 
-// Apply the initial state when the page loads
-chrome.storage.sync.get(
-  ["hideComments", "hideRecommendations", "hideHomepage", "hideShortsMenu"],
-  (data) => {
-    toggleElements(["#comments"], data.hideComments);
-    toggleElements(["#related"], data.hideRecommendations);
-    toggleElements(
-      ['#page-manager > ytd-browse[page-subtype="home"]'],
-      data.hideHomepage
+// Function to apply the saved state
+function applySavedState() {
+  chrome.storage.sync.get(
+    ["hideComments", "hideRecommendations", "hideHomepage", "hideShortsMenu"],
+    (data) => {
+      // Hide/show comments
+      toggleElements(["#comments"], data.hideComments);
+
+      // Hide/show recommendations
+      toggleElements(["#related"], data.hideRecommendations);
+
+      // Hide/show homepage
+      toggleElements(
+        ['#page-manager > ytd-browse[page-subtype="home"]'],
+        data.hideHomepage
+      );
+
+      // Hide/show Shorts menu item
+      toggleElements(['a[title="Shorts"]'], data.hideShortsMenu);
+    }
+  );
+}
+
+// Debounce function to limit how often applySavedState is called
+function debounce(func, delay) {
+  let timeout;
+  return function (...args) {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, args), delay);
+  };
+}
+
+// Debounced version of applySavedState
+const debouncedApplySavedState = debounce(applySavedState, 300);
+
+// Use MutationObserver to monitor the DOM
+const observer = new MutationObserver((mutations, obs) => {
+  // Check if relevant elements are added or modified
+  const hasRelevantChanges = mutations.some((mutation) => {
+    return (
+      mutation.type === "childList" &&
+      (mutation.target.querySelector("#comments") ||
+        mutation.target.querySelector("#related") ||
+        mutation.target.querySelector(
+          '#page-manager > ytd-browse[page-subtype="home"]'
+        ) ||
+        mutation.target.querySelector('a[title="Shorts"]'))
     );
-    toggleElements(['a[title="Shorts"]'], data.hideShortsMenu);
+  });
+
+  if (hasRelevantChanges) {
+    debouncedApplySavedState();
   }
-);
+});
+
+// Start observing the document for changes
+observer.observe(document, {
+  childList: true,
+  subtree: true,
+});
+
+// Apply the saved state immediately (in case the DOM is already ready)
+applySavedState();
