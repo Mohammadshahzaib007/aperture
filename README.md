@@ -6,6 +6,7 @@
 ---
 
 ## **Features**
+
 - **Hide Comments**: Remove the comments section from YouTube videos.
 - **Hide Recommendations**: Block recommended videos on the sidebar and homepage.
 - **Hide Homepage**: Replace the YouTube homepage with a clean, distraction-free interface.
@@ -17,23 +18,27 @@
 ## **Screenshots**
 
 ### Popup UI
+
 ![Popup UI](screenshots/popup.png)  
-*The popup allows you to toggle features on and off.*
+_The popup allows you to toggle features on and off._
 
 ### Clean YouTube Interface
+
 ![Clean YouTube](screenshots/clean-youtube.png)  
-*YouTube with distractions removed for a focused experience.*
+_YouTube with distractions removed for a focused experience._
 
 ---
 
 ## **Installation**
 
 ### **Option 1: Install from Chrome Web Store**
+
 1. Visit the [Aperture Chrome Web Store page](https://chrome.google.com/webstore/detail/aperture/your-extension-id).
 2. Click **Add to Chrome**.
 3. Confirm by clicking **Add Extension**.
 
 ### **Option 2: Install Manually**
+
 1. Download the extension files from the [GitHub repository](https://github.com/your-username/aperture).
 2. Extract the files to a folder on your computer.
 3. Open Chrome and go to `chrome://extensions/`.
@@ -43,6 +48,7 @@
 ---
 
 ## **How to Use**
+
 1. Click the Aperture icon in the Chrome toolbar to open the popup.
 2. Toggle the checkboxes to hide/show:
    - **Comments**
@@ -54,6 +60,7 @@
 ---
 
 ## **Technical Details**
+
 - **Built With**: HTML, CSS, JavaScript, Chrome Extensions API.
 - **Storage**: Uses `chrome.storage.sync` to save and sync user preferences.
 - **Permissions**:
@@ -63,26 +70,15 @@
 
 ---
 
-## **Contributing**
-Contributions are welcome! If you'd like to improve Aperture, follow these steps:
-1. Fork the [GitHub repository](https://github.com/your-username/aperture).
-2. Create a new branch for your feature or bug fix.
-3. Submit a pull request with a detailed description of your changes.
-
----
-
-## **License**
-This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
-
----
-
 ## **Credits**
+
 - **Icon**: Designed by [Your Name/Designer Name].
 - **Inspiration**: Inspired by the need to reduce distractions while using YouTube.
 
 ---
 
 ## **Support**
+
 If you encounter any issues or have suggestions, please [open an issue](https://github.com/your-username/aperture/issues) on GitHub.
 
 ---
