@@ -31,6 +31,12 @@ header {
   background: #222225;
   box-shadow: 0px 0px 0px 2px #2f2f33 inset;
   margin-bottom: 2rem;
+  justify-content: space-between;
+}
+
+.enabled-label {
+  color: var(--secondary-color);
+  font-size: 0.75rem;
 }
 
 header > div {
@@ -70,7 +76,7 @@ header > div > p {
   align-items: center;
   flex: 1;
   justify-content: space-between;
-  color: var(--text-primary-color);
+  color: #dfdfee;
   font-size: 0.875rem;
   font-weight: 400;
 }
@@ -108,4 +114,8 @@ header > div > p {
 
 .toggle-input:checked + .toggle .circle {
   left: 20px;
+}
+
+.toggle-wrapper:has(.toggle-input:checked) {
+  color: var(--text-primary-color);
 }
