@@ -6,6 +6,12 @@
   --bg-color: #161618;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   font-family: Arial, sans-serif;
   padding: 1.25rem;
@@ -14,6 +20,27 @@ body {
   font-family: "Inter", serif;
   width: 27.75rem;
   margin: 0;
+}
+
+header {
+  width: 100%;
+  padding: 8px 10px;
+  display: flex;
+  border-radius: 10px;
+  border: 1px solid #0c0c0e;
+  background: #222225;
+  box-shadow: 0px 0px 0px 2px #2f2f33 inset;
+  margin-bottom: 2rem;
+}
+
+header > div {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+header > div > p {
+  font-size: 1rem;
 }
 
 .main-container {
