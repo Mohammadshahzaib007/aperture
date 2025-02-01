@@ -3,34 +3,97 @@
 
 <head>
     <title>YouTube Blocker</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
-    <div>
-        <label>
-            <input type="checkbox" id="toggleComments"> Hide Comments
-        </label>
-    </div>
-    <div>
-        <label>
-            <input type="checkbox" id="toggleRecommendations"> Hide Recommendations
-        </label>
-    </div>
-    <div>
-        <label>
-            <input type="checkbox" id="toggleHomepage"> Hide Homepage
-        </label>
-    </div>
-    <div>
-        <label>
-            <input type="checkbox" id="toggleShortsMenu"> Hide Shorts Menu
-        </label>
-    </div>
-    <div>
-        <label>
-            <input type="checkbox" id="selectAll"> Select All
-        </label>
+
+    <div class="main-container">
+        <div class="item-container">
+            <div class="icon-container">
+                <img src="icons/home.svg" />
+            </div>
+            <label class="toggle-wrapper">
+                Hide Homepage
+                <input type="checkbox" id="toggleRecommendations" class="toggle-input" />
+                <div class="toggle">
+                    <div class="circle"></div>
+                </div>
+            </label>
+            <!-- <label>
+                <input type="checkbox" id="toggleHomepage" /> Hide Homepage
+            </label> -->
+        </div>
+
+        <div class="item-container">
+            <div class="icon-container">
+                <img src="icons/recommendations.svg" />
+            </div>
+            <label class="toggle-wrapper">
+                Hide Recommendations
+                <input type="checkbox" id="toggleRecommendations" class="toggle-input" />
+                <div class="toggle">
+                    <div class="circle"></div>
+                </div>
+            </label>
+
+            <!-- <label>
+                <input type="checkbox" id="toggleRecommendations" /> Hide
+                Recommendations
+            </label> -->
+        </div>
+
+        <div class="item-container">
+            <div class="icon-container">
+                <img src="icons/comments.svg" />
+            </div>
+            <label class="toggle-wrapper">
+                Hide Comments
+                <input type="checkbox" id="toggleComments" class="toggle-input" />
+                <div class="toggle">
+                    <div class="circle"></div>
+                </div>
+            </label>
+            <!-- <label>
+                <input type="checkbox" id="toggleComments"> Hide Comments
+            </label> -->
+        </div>
+
+
+
+
+
+        <div class="item-container">
+            <div class="icon-container">
+                <img src="icons/shorts.svg" />
+            </div>
+            <label class="toggle-wrapper">
+                Hide Shorts Menu
+                <input type="checkbox" id="toggleShortsMenu" class="toggle-input" />
+                <div class="toggle">
+                    <div class="circle"></div>
+                </div>
+            </label>
+            <!-- <label>
+                <input type="checkbox" id="toggleShortsMenu" /> Hide Shorts Menu
+            </label> -->
+        </div>
+
+        <div class="item-container">
+            <label class="toggle-wrapper">
+                Select All
+                <input type="checkbox" id="selectAll" class="toggle-input" />
+                <div class="toggle">
+                    <div class="circle"></div>
+                </div>
+            </label>
+            <!-- <label> <input type="checkbox" id="selectAll" /> Select All </label> -->
+        </div>
     </div>
     <script src="popup.js"></script>
 </body>
