@@ -125,6 +125,7 @@ footer {
   display: flex;
   justify-content: space-between;
   padding: 24px 0px;
+  padding-bottom: 0px;
 }
 
 footer a {
