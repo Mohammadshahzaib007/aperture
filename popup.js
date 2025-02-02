@@ -5,7 +5,10 @@ document.addEventListener("DOMContentLoaded", () => {
   );
   const toggleHomepage = document.getElementById("toggleHomepage");
   const toggleShortsMenu = document.getElementById("toggleShortsMenu");
+  const toggleEnable = document.getElementById("toggleEnable");
   const selectAll = document.getElementById("selectAll");
+
+  const enabledLabel = document.getElementById("enabledLabel");
 
   // Load saved states
   chrome.storage.sync.get(
@@ -68,6 +71,17 @@ document.addEventListener("DOMContentLoaded", () => {
   toggleShortsMenu.addEventListener("change", () => {
     saveState();
     updateSelectAll();
+    console.log("shorts ");
+  });
+
+  toggleEnable.addEventListener("change", (e) => {
+    if (toggleEnable.checked) {
+      enabledLabel.innerText = "Enabled";
+      enabledLabel.style.color = "var(--secondary-color)";
+    } else {
+      enabledLabel.innerText = "Enable";
+      enabledLabel.style.color = "var(--text-secondary-colore)";
+    }
   });
 
   // Add event listener for "Select All"
