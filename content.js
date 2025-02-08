@@ -16,29 +16,54 @@ function toggleElements(selectors, shouldHide) {
 
 // Listen for messages from the popup
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if (message.action === "updatePage") {
-    // Hide/show comments
-    toggleElements(["#comments"], message.hideComments);
+  if (message.action !== "updatePage") return;
 
-    // Hide/show recommendations
-    toggleElements(["#related"], message.hideRecommendations);
-
-    // Hide/show homepage
-    toggleElements(
-      ['#page-manager > ytd-browse[page-subtype="home"]'],
-      message.hideHomepage
-    );
-
-    // Hide/show shorts menu item
-    toggleElements(['a[title="Shorts"]'], message.hideShortsMenu);
+  if (!message.isExtensionEnabled) {
+    toggleElements(["#comments"], false);
+    toggleElements(["#related"], false);
+    toggleElements(['#page-manager > ytd-browse[page-subtype="home"]'], false);
+    toggleElements(['a[title="Shorts"]'], false);
+    return;
   }
+
+  // Hide/show comments
+  toggleElements(["#comments"], message.hideComments);
+
+  // Hide/show recommendations
+  toggleElements(["#related"], message.hideRecommendations);
+
+  // Hide/show homepage
+  toggleElements(
+    ['#page-manager > ytd-browse[page-subtype="home"]'],
+    message.hideHomepage
+  );
+
+  // Hide/show shorts menu item
+  toggleElements(['a[title="Shorts"]'], message.hideShortsMenu);
 });
 
 // Function to apply the saved state
 function applySavedState() {
   chrome.storage.sync.get(
-    ["hideComments", "hideRecommendations", "hideHomepage", "hideShortsMenu"],
+    [
+      "hideComments",
+      "hideRecommendations",
+      "hideHomepage",
+      "hideShortsMenu",
+      "isExtensionEnabled",
+    ],
     (data) => {
+      if (!data.isExtensionEnabled) {
+        toggleElements(["#comments"], false);
+        toggleElements(["#related"], false);
+        toggleElements(
+          ['#page-manager > ytd-browse[page-subtype="home"]'],
+          false
+        );
+        toggleElements(['a[title="Shorts"]'], false);
+        return;
+      }
+
       // Hide/show comments
       toggleElements(["#comments"], data.hideComments);
 

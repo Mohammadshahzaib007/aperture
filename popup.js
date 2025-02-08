@@ -12,12 +12,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Load saved states
   chrome.storage.sync.get(
-    ["hideComments", "hideRecommendations", "hideHomepage", "hideShortsMenu"],
+    [
+      "hideComments",
+      "hideRecommendations",
+      "hideHomepage",
+      "hideShortsMenu",
+      "isExtensionEnabled",
+    ],
     (data) => {
       toggleComments.checked = data.hideComments || false;
       toggleRecommendations.checked = data.hideRecommendations || false;
       toggleHomepage.checked = data.hideHomepage || false;
       toggleShortsMenu.checked = data.hideShortsMenu || false;
+      toggleEnable.checked = data.isExtensionEnabled || false;
       updateSelectAll();
     }
   );
@@ -30,6 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
         hideRecommendations: toggleRecommendations.checked,
         hideHomepage: toggleHomepage.checked,
         hideShortsMenu: toggleShortsMenu.checked,
+        isExtensionEnabled: toggleEnable.checked,
       },
       () => {
         // Send a message to the content script to update the page
@@ -40,6 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
             hideRecommendations: toggleRecommendations.checked,
             hideHomepage: toggleHomepage.checked,
             hideShortsMenu: toggleShortsMenu.checked,
+            isExtensionEnabled: toggleEnable.checked,
           });
         });
       }
@@ -71,10 +80,10 @@ document.addEventListener("DOMContentLoaded", () => {
   toggleShortsMenu.addEventListener("change", () => {
     saveState();
     updateSelectAll();
-    console.log("shorts ");
   });
 
   toggleEnable.addEventListener("change", (e) => {
+    saveState();
     if (toggleEnable.checked) {
       enabledLabel.innerText = "Enabled";
       enabledLabel.style.color = "var(--secondary-color)";
