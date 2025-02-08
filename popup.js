@@ -7,8 +7,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const toggleShortsMenu = document.getElementById("toggleShortsMenu");
   const toggleEnable = document.getElementById("toggleEnable");
   const selectAll = document.getElementById("selectAll");
+  const mainContent = document.querySelector(".main-container");
 
   const enabledLabel = document.getElementById("enabledLabel");
+
+  function disableMainContent(isEnabled = toggleEnable.checked) {
+    const overlay = mainContent.querySelector(".overlay");
+    if (isEnabled) {
+      mainContent.style.opacity = "1";
+      overlay.style.display = "none";
+      return;
+    }
+    mainContent.style.opacity = "0.4";
+    overlay.style.display = "block";
+  }
 
   // Load saved states
   chrome.storage.sync.get(
@@ -25,6 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
       toggleHomepage.checked = data.hideHomepage || false;
       toggleShortsMenu.checked = data.hideShortsMenu || false;
       toggleEnable.checked = data.isExtensionEnabled || false;
+      disableMainContent(data.isExtensionEnabled || false);
       updateSelectAll();
     }
   );
@@ -84,6 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   toggleEnable.addEventListener("change", (e) => {
     saveState();
+    disableMainContent();
     if (toggleEnable.checked) {
       enabledLabel.innerText = "Enabled";
       enabledLabel.style.color = "var(--secondary-color)";
