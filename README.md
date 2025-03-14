@@ -34,7 +34,7 @@ _YouTube with distractions removed for a focused experience._
 
 ### **Option 1: Install from Chrome Web Store**
 
-1. Visit the [Aperture Chrome Web Store page](https://chrome.google.com/webstore/detail/aperture/your-extension-id).
+1. Visit the [Aperture Chrome Web Store page](https://chromewebstore.google.com/detail/aperture/lpaimnlpkkdkhbfhboiboacpoglaahaa).
 2. Click **Add to Chrome**.
 3. Confirm by clicking **Add Extension**.
 
